@@ -2,7 +2,7 @@
   <div>
     <h3 class="text-center mt-2 mb-2">List of added phones</h3>
     <div align="center" class="row item-list">
-      <Phone v-for="i in 10" :key="i">
+      <Phone v-for="phone in phoneList" :key="phone.model">
         <img src="../assets/default.jpg" class="card-img-top" height="200">
         <div class="card-body">
           <h6 class="card-title">Model</h6>
@@ -27,6 +27,11 @@ import Phone from "@/components/Phone";
 export default {
   components: {
     Phone
+  },
+  data: function() {
+    return{
+      phoneList: []
+    }
   }
 }
 </script>
