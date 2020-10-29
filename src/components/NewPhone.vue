@@ -15,7 +15,8 @@
         </div>
         <div class="row">
           <div class="col input-group input-group-sm">
-            <input type="text" name="phone-price" class="form-control" v-model="phone.price" placeholder="Phone price">
+            <input type="number" name="phone-price" class="form-control" v-model="phone.price" placeholder="Phone price">
+
           </div>
           <div class="col input-group input-group-sm">
             <input type="number" name="phone-piece" class="form-control" v-model="phone.piece" placeholder="Phone piece">
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import {eventBus} from "@/main";
+
 export default {
   data: function() {
     return{
@@ -46,8 +49,15 @@ export default {
       this.phone.selectedImage = URL.createObjectURL(file);
     },
     createPhone() {
-      this.phone.totalPrice = this.phone.piece * this.phone.price;
-      console.log(this.phone);
+      this.phone.totalPrice = this.phone.price * this.phone.piece;
+      eventBus.$emit("pushPhone", this.phone);
+      this.phone = {
+        model: null,
+        price: null,
+        piece: null,
+        totalPrice: null,
+        selectedImage: null,
+      }
     }
   }
 }
