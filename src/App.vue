@@ -5,9 +5,6 @@
     <Progress></Progress>
     <hr>
     <Products></Products>
-
-
-
   </div>
 </template>
 

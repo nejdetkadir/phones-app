@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="phoneList.length > 0">
     <h3 class="text-center mt-2 mb-2">List of added phones</h3>
     <div align="center" class="row item-list">
       <Phone v-for="phone in phoneList" :key="phone.model">
@@ -35,7 +35,12 @@ export default {
   },
   created() {
     eventBus.$on('pushPhone', (data) => {
-      this.phoneList.push(data);
+      if (this.phoneList.length > 9) {
+        alert('You can not create a new phone anymore!!!')
+      } else {
+        this.phoneList.push(data);
+        eventBus.$emit("updateProgress", this.phoneList.length);
+      }
     });
   }
 }
